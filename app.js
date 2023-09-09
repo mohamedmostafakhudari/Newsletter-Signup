@@ -84,7 +84,16 @@ app.post("/", (req, res) => {
 	//   [c] Finish sending the request
 	request.end();
 });
+// process.env.PORT is a dynamic port used by the platform we will be using
+// to deploy our website to add it's own port instead of
+// our local 3000 port
 
-app.listen(3000, () => {
+// || 3000 because process.env.PORT is unknown for our server so
+// we this addition will allow both of us (our server and platform server)
+// to be able to run the website locally
+app.listen(process.env.PORT || 3000, () => {
 	console.log("The server is running on port 3000");
 });
+
+// Export the Express API
+module.exports = app;
